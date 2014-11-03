@@ -1,0 +1,38 @@
+<assembly>
+  <id>spring-xd-module</id>
+  <formats>
+    <format>jar</format>
+  </formats>
+  <includeBaseDirectory>false</includeBaseDirectory>
+  <dependencySets>
+    <dependencySet>
+      <unpack>false</unpack>
+      <useProjectArtifact>false</useProjectArtifact>
+      <outputDirectory>/lib</outputDirectory>
+      <includes>
+          <include>*.dont_include_anything_by_default</include>
+         <!-- Add any jars required by your module here. The format is [groupId]:[artifactId]-->
+         <!--example
+          <include>com.darwinsys:hirondelle-date4j</include>
+         -->
+      </includes>
+    </dependencySet>
+  </dependencySets>
+  <fileSets>
+    <fileSet>
+      <directory>${project.build.outputDirectory}</directory>
+      <includes>
+         <include>**/*.class</include>
+      </includes>
+      <outputDirectory>/</outputDirectory>
+    </fileSet>
+
+     <fileSet>
+      <directory>${project.basedir}/target/config</directory>
+       <includes>
+         <include>**/*.*</include>
+      </includes>
+      <outputDirectory>/config</outputDirectory>
+    </fileSet>
+  </fileSets>
+</assembly>

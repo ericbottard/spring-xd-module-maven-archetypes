@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/integration"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:beans="http://www.springframework.org/schema/beans"
+			 xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/integration
+		http://www.springframework.org/schema/integration/spring-integration.xsd">
+
+<!-- An example processor bean definition file. Channels 'input' and 'output' are required for a processor module.
+     This illustrates the use of profiles to provide alternate bean definitions controlled by module options (see ExampleModuleOptionsMetadata.java). 
+     
+     This example expects a String payload and simply wraps the payload in prefix or suffix values bound to module options. 
+-->
+
+	<channel id="input" />
+
+	<channel id="output" />
+
+	<beans:beans profile="use-both">
+		<transformer input-channel="input" expression="'${prefix}'+ payload + '${suffix}'"
+					 output-channel="output" />
+	</beans:beans>
+
+	<beans:beans profile="use-prefix">
+		<transformer input-channel="input" expression="'${prefix}'+ payload"
+					 output-channel="output" />
+	</beans:beans>
+
+</beans:beans>
